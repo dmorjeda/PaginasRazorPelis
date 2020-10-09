@@ -1,0 +1,74 @@
+﻿@page "{CadenaBusqueda?}"
+@model PaginasRazorPelis.Pages.Pelis.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Indice</h1>
+
+<p>
+    <a asp-page="Create">Crear Nuevo</a>
+</p>
+
+<form>
+    <p>
+        Genero: <select asp-for="GeneroPelicula" asp-items="Model.Generos">
+            <option value="">All</option>
+        </select>
+    </p>
+    <br>
+    Título: <input type="text" asp-for="CadenaBusqueda" />
+    <input type="submit" value="Filtro" />
+</form>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pelicula[0].Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pelicula[0].FechaEstreno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pelicula[0].Genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pelicula[0].Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pelicula[0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Pelicula) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEstreno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Editar</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Detalles</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
